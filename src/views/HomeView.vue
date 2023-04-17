@@ -1,10 +1,14 @@
 <template lang="pug">
-v-row#home
-  v-col(cols="12")
-    h1 {{ currentText }}
-    h1 {{ currentTime }}
-  v-col(cols="12")
-    v-btn(v-if="status !== 1" icon="mdi-play" variant="text" @click="startTimer")
+#home
+  v-col
+    p#title 沒有待辦事項
+    p {{ currentText }}
+  v-col
+    p {{ currentTime }}
+  v-col(cols="6")
+    h1
+  v-col(cols="6")
+    v-btn(v-if="status !== 1" icon="mdi-play" variant="text" color="lighten-5" @click="startTimer")
     v-btn(v-if="status === 1" icon="mdi-pause" variant="text" @click="pauseTimer")
     v-btn(v-if="currentItem.length > 0" icon="mdi-skip-next" variant="text" @click="finishTimer")
 </template>
@@ -66,7 +70,7 @@ const finishTimer = () => {
 }
 
 const currentText = computed(() => {
-  return currentItem.value.length > 0 ? currentItem.value : items.value.length > 0 ? '點擊開始' : '沒有事項'
+  return currentItem.value.length > 0 ? currentItem.value : items.value.length > 0 ? '點擊開始' : '目前沒有事項'
 })
 const currentTime = computed(() => {
   const m = Math.floor(timeleft.value / 60).toString().padStart(2, '0')

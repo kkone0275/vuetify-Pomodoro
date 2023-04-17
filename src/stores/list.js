@@ -5,7 +5,7 @@ const timeBreak = parseInt(import.meta.env.VITE_TIME_BREAK)
 
 export const useListStore = defineStore({
   id: 'list',
-  state() {
+  state () {
     return {
       items: [],
       finishedItems: [],
@@ -17,7 +17,7 @@ export const useListStore = defineStore({
   },
   // 這裡放所有修改 state 的 function
   actions: {
-    addItem(name) {
+    addItem (name) {
       // 用 this. 指向 state
       this.items.push({
         id: this.id++,
@@ -26,36 +26,36 @@ export const useListStore = defineStore({
         model: name
       })
     },
-    editItem(id) {
+    editItem (id) {
       const i = this.getItemIndexById(id)
       this.items[i].edit = true
     },
-    delItem(id) {
+    delItem (id) {
       const i = this.getItemIndexById(id)
       this.items.splice(i, 1)
     },
-    confirmEditItem(id) {
+    confirmEditItem (id) {
       const i = this.getItemIndexById(id)
       this.items[i].name = this.items[i].model
       this.items[i].edit = false
     },
-    undoEditItem(id) {
+    undoEditItem (id) {
       const i = this.getItemIndexById(id)
       this.items[i].model = this.items[i].name
       this.items[i].edit = false
     },
-    getItemIndexById(id) {
+    getItemIndexById (id) {
       return this.items.findIndex(item => item.id === id)
     },
-    start() {
+    start () {
       // this.currentItem = this.items[0].name
       // this.items.splice(0, 1)
       this.currentItem = this.break ? '休息一下' : this.items.shift().name
     },
-    countdown() {
+    countdown () {
       this.timeleft--
     },
-    finish() {
+    finish () {
       if (!this.break) {
         this.finishedItems.push({
           name: this.currentItem,
@@ -68,7 +68,7 @@ export const useListStore = defineStore({
       }
       this.timeleft = this.break ? timeBreak : time
     },
-    delFinishedItem(id) {
+    delFinishedItem (id) {
       const i = this.finishedItems.findIndex(item => item.id === id)
       this.finishedItems.splice(i, 1)
     }

@@ -4,7 +4,7 @@ export const useSettingsStore = defineStore({
   // 這個 store 的 id
   id: 'settings',
   // 這個 store 存了哪些資料
-  state() {
+  state () {
     return {
       alarms: [
         { id: 1, name: 'Alarm', file: new URL('@/assets/alarm.mp3', import.meta.url).href },
@@ -15,7 +15,7 @@ export const useSettingsStore = defineStore({
     }
   },
   actions: {
-    async toggleNotify() {
+    async toggleNotify () {
       if (!this.notify && 'Notification' in window) {
         const permission = await Notification.requestPermission()
         if (permission === 'granted') {
@@ -27,7 +27,7 @@ export const useSettingsStore = defineStore({
     }
   },
   getters: {
-    selectedAlarmFile() {
+    selectedAlarmFile () {
       const i = this.alarms.findIndex(alarm => alarm.id === this.selectedAlarms)
       return this.alarms[i].file
     }

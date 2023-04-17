@@ -3,7 +3,7 @@ v-row#list
   v-col(cols="12")
     h1.text-center 待辦事項
   v-col(cols="12")
-    v-text-field(ref="input" v-model="newItem" label="新增事項" :rules="[rules.required, rules.length]" @keydown.enter="onInputSubmit")
+    v-text-field.fontWhite(ref="input" v-model="newItem" label="新增事項" :rules="[rules.required, rules.length]" @keydown.enter="onInputSubmit")
       template(#append)
         v-btn(icon="mdi-plus" variant="text" @click="onInputSubmit")
     v-table
@@ -11,9 +11,9 @@ v-row#list
         tr
           th 名稱
           th 操作
-          tbody
+      tbody
         tr(v-if="items.length === 0")
-          td.text-center(colspan="2") 沒有事項
+          td.text-center(colspan="2") 無待辦事項
         tr(v-for="item in items" v-else :key="item.id" ref="editInputs")
           td
             v-text-field(v-if="item.edit" v-model="item.model" autofocus :rules="[rules.required, rules.length]")
@@ -27,7 +27,7 @@ v-row#list
               v-btn(icon="mdi-delete" variant="text" color="red" @click="delItem(item.id)")
   v-divider
   v-col(cols="12")
-    h1.text-center 已完成事項
+    h1.text-center 已完成任務
   v-col(cols="12")
     v-table
       thead
@@ -57,10 +57,10 @@ const input = ref(null)
 const editInputs = ref([])
 
 const rules = {
-  required(v) {
+  required (v) {
     return !!v || '欄位必填'
   },
-  length(v) {
+  length (v) {
     return v.length >= 3 || '必須三個字以上'
   }
 }
